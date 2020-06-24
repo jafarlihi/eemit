@@ -1,8 +1,21 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
 plugins {
     id 'java-library'
 }
 
+apply plugin: 'com.bmuschko.nexus'
+
 version '0.1.0'
+group 'com.github.jafarlihi'
+archivesBaseName = 'eemit'
 
 repositories {
     jcenter()
@@ -10,4 +23,47 @@ repositories {
 
 dependencies {
     testImplementation 'junit:junit:4.13'
+}
+
+modifyPom {
+    project {
+        name 'eemit'
+        description 'Event emitter library for Java'
+        url 'https://github.com/jafarlihi/eemit'
+        inceptionYear '2020'
+
+        scm {
+            url 'https://github.com/jafarlihi/eemit'
+            connection 'scm:https://github.com/jafarlihi/eemitt.git'
+            developerConnection 'scm:git://github.com/jafarlihi/eemit.git'
+        }
+
+        licenses {
+            license {
+                name 'MIT License'
+                url 'https://raw.githubusercontent.com/jafarlihi/eemit/master/LICENSE'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'jafarlihi'
+                name 'Hikmat Jafarli'
+                email 'jafarlihi@gmail.com'
+            }
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
 }
