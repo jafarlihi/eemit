@@ -1,5 +1,5 @@
 # eemit
-eemit is a Java event emitter library
+eemit is a Java event emitter library. It lets you emit objects (from multiple places) of the specified type in a given channel and handle them elsewhere in code by subscribing to that channel.
 
 ### Install
 Maven:
